@@ -23,7 +23,7 @@ var balls = [];
 
 
 
-balls.push(new Ball(100,200,20));
+balls.push(new Ball(102 ,200,20));
 
 setInterval(function(){
 	
@@ -37,6 +37,7 @@ setInterval(function(){
 },10)
 
 var addBall = function(event){
+	console.log("nowa pilka");
 	balls.push(new Ball(event.offsetX, event.offsetY, 25));
 }
 
