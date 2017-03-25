@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html lang="pl-PL">
+<html>
+<head>
+
+<title>HTML Tutorial</title>
+
+
+</head>
+
+<body>
+<canvas id="sheet" width="600" height="400" style="border-style: solid;"></canvas></canvas>
+<script src="ball.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+<script>
+
+var sheet = document.getElementById("sheet");
+var context = sheet.getContext("2d");
+
+
+var balls = [];
+
+
+
+balls.push(new Ball(100,200,20));
+
+setInterval(function(){
+	
+	context.clearRect(0,0,600,400);
+	for(var i = 0; i < balls.length; i++){
+		balls[i].draw();
+		balls[i].move();
+		balls[i].checkCollision();
+	}
+	context.strokeRect(0,0,600,400);
+},10)
+
+var addBall = function(event){
+	balls.push(new Ball(event.offsetX, event.offsetY, 25));
+}
+
+$("#sheet").click(addBall);
+
+</script>
+
+</body>
+</html> 

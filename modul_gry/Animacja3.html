@@ -1,0 +1,94 @@
+ <!DOCTYPE html>
+<html lang="pl-PL">
+
+<title></title>
+<head>
+<meta charset="UTF-8">
+<script src="D:\Warsztaty_Programowania\Warsztaty_24\jquery.js"></script>
+</head>
+<body>
+
+<canvas id="canv" width="400" height="400" border="solid"></canvas>
+
+<script>
+
+var canvas = document.getElementById("canv");
+var context = canvas.getContext("2d");
+
+//var coordinates = getCoordinates(event);
+var Ball = function(x, y)
+{
+	this.x = x;
+	this.y = y;
+	this.radius = 3;
+	this.xSpeed = (Math.random() * 5 - 2);
+	this.ySpeed = (Math.random() * 5 - 2);
+};
+
+var ball=[];
+
+function circle(x, y, radius, fill)
+{
+	context.beginPath();
+	context.arc(x,y,radius,0,Math.PI*2, false);
+	if(fill)
+	{
+		context.fill();
+	}
+	else
+	{
+		context.stroke();
+	}
+};
+
+Ball.prototype.draw = function()
+{
+	console.log("draw");
+	circle(this.x, this.y, 3, true);
+};
+
+Ball.prototype.move = function()
+{
+	console.log("move");
+	this.x = this.x + this.xSpeed;
+	this.y = this.y + this.ySpeed;
+};
+
+Ball.prototype.checkCollision = function()
+{
+	console.log("check");
+	if(this.x - this.radius <= 0 || this.x + this.radius >= 400)
+	{
+		this.xSpeed = -this.xSpeed;
+	}
+
+	if(this.y - this.radius <= 0 || this.y + this.radius >= 400)
+	{
+		this.ySpeed = - this.ySpeed;
+	}
+};
+
+function addBall(event)
+{
+	ball.push(new Ball(event.offsetX, event.offsetY));
+}
+
+function animate()
+{
+	context.clearRect(0,0,400,400);
+	for(var i = 0; i < ball.length; i++)
+	{
+		ball[i].draw();
+		ball[i].move();
+		ball[i].checkCollision();
+	}	
+	context.strokeRect(0,0,400,400);
+};
+
+setInterval(animate, 5);
+
+$("#canv").click(addBall);
+
+</script>
+</body>
+</html> 

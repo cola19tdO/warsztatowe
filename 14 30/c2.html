@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html lang="pl-PL">
+<html>
+<head>
+
+<title>HTML Tutorial</title>
+
+
+</head>
+
+<body>
+<canvas id="sheet" width="400" height="200"></canvas>
+
+<script>
+
+var sheet = document.getElementById("sheet");
+var context = sheet.getContext("2d");
+
+
+var circle = function(x, y, radious, fill){
+	context.beginPath();
+	context.arc(x,y,radious,0, Math.PI*2, false);
+	if(fill){
+		context.fill();
+	} else {
+		context.stroke();
+	}
+}
+
+var drawBee = function(x, y){
+	context.lineWidth =2;
+	context.strokeStyle = "Black";
+	context.fillStyle = "Gold";
+
+	circle(x,y,8,true);
+	circle(x,y,8,false);
+	circle(x-5, y-11,5,false);
+	circle(x+5, y-11, 5, false);
+	circle(x-2, y-1, 2, false);
+	circle(x+2, y-1, 2, false);
+}
+
+var x = 0;
+var y = 0;
+
+var moveBee = function(){
+	context.clearRect(0,0,400,400);
+	drawBee(x,y);
+	x+=2;
+	y++;
+}
+
+setInterval(moveBee, 50);
+
+
+
+</script>
+
+</body>
+</html> 
