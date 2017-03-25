@@ -21,6 +21,8 @@ var context = sheet.getContext("2d");
 
 var balls = [];
 
+
+
 balls.push(new Ball(100,200,20));
 
 setInterval(function(){
@@ -35,7 +37,7 @@ setInterval(function(){
 },10)
 
 var addBall = function(event){
-	balls.push(new Ball(event.offsetX, event.offsetY, 20));
+	balls.push(new Ball(event.offsetX, event.offsetY, 25));
 }
 
 $("#sheet").click(addBall);
